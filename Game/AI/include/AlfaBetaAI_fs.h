@@ -1,7 +1,7 @@
 #pragma once
-#include "Player.h"
-#include "UI.h"
-#include "Board.h"
+#include "../../include/UI.h"
+#include "../../include/Player.h"
+
 
 /// <summary>
 /// Alfa-Bera prining AI with full search of moves (compared to another when arrows are searched only for the best amazon)

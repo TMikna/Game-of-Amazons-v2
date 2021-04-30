@@ -1,6 +1,6 @@
 #pragma once
-#include "Player.h"
-#include "UI.h"
+#include "../../include/Player.h"
+#include "../../include/UI.h"
 class AlfaBetaAI_sssi :
     public Player
 {

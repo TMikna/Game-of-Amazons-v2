@@ -1,4 +1,4 @@
-﻿#include "AlfaBetaAI_ss.h"
+﻿#include "..\include\AlfaBetaAI_ss.h"
 
 void AlfaBetaAI_ss::moveAmazon()
 {

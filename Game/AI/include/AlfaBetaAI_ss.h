@@ -1,13 +1,14 @@
-
 #pragma once
-#include "Player.h"
-#include "UI.h"
-class AlfaBetaAI_sssiie :
-	public Player
+#include "../../include/Player.h"
+#include "../../include/UI.h"
+
+
+class AlfaBetaAI_ss :
+    public Player
 {
 
 public:
-	AlfaBetaAI_sssiie(Board* board, UI* ui, int teamColor) :Player(teamColor)
+	AlfaBetaAI_ss(Board* board, UI* ui, int teamColor):Player(teamColor)
 	{
 		this->board = board;
 		this->ui = ui;
@@ -26,7 +27,6 @@ private:
 	// int** amazons; //amazons, controlled by AI;
 
 	inline float AlfaBeta(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer);
-	inline float AlfaBetaArrow(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer, AmazonMove bestMove);
 	inline float Evaluate(Board* board, int nextMovingTeamColor);
 
 };

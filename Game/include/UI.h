@@ -3,8 +3,8 @@
 //UI based on chess tutorial: https://www.youtube.com/watch?v=_4EuZI8Q8cs
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Constants.h"
 #include "AmazonMove.h"
+#include "Constants.h"
 
 using namespace sf;
 

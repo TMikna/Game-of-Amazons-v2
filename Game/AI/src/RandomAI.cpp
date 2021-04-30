@@ -1,4 +1,4 @@
-#include "RandomAI.h"
+#include "..\include\RandomAI.h"
 #include <iostream>
 
 void RandomAI::moveAmazon()

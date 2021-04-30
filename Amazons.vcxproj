@@ -151,29 +151,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AlfaBetaAI_ss.cpp" />
-    <ClCompile Include="AlfaBetaAI_fs.cpp" />
-    <ClCompile Include="AlfaBetaAI_sssi.cpp" />
-    <ClCompile Include="AlfaBetaAI_sssiie.cpp" />
-    <ClCompile Include="RandomAI.cpp" />
-    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Game\AI\src\AlfaBetaAI_ss.cpp" />
+    <ClCompile Include="Game\AI\src\AlfaBetaAI_fs.cpp" />
+    <ClCompile Include="Game\AI\src\AlfaBetaAI_sssi.cpp" />
+    <ClCompile Include="Game\AI\src\AlfaBetaAI_sssiie.cpp" />
+    <ClCompile Include="Game\AI\src\RandomAI.cpp" />
+    <ClCompile Include="Game\src\Board.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Person.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Game\src\Person.cpp" />
+    <ClCompile Include="Game\src\Player.cpp" />
+    <ClCompile Include="Game\src\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AlfaBetaAI_ss.h" />
-    <ClInclude Include="AlfaBetaAI_fs.h" />
-    <ClInclude Include="AlfaBetaAI_sssi.h" />
-    <ClInclude Include="AlfaBetaAI_sssiie.h" />
-    <ClInclude Include="AmazonMove.h" />
-    <ClInclude Include="RandomAI.h" />
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="Constants.h" />
-    <ClInclude Include="Person.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="UI.h" />
+    <ClInclude Include="Game\AI\include\AlfaBetaAI_ss.h" />
+    <ClInclude Include="Game\AI\include\AlfaBetaAI_fs.h" />
+    <ClInclude Include="Game\AI\include\AlfaBetaAI_sssi.h" />
+    <ClInclude Include="Game\AI\include\AlfaBetaAI_sssiie.h" />
+    <ClInclude Include="Game\include\AmazonMove.h" />
+    <ClInclude Include="Game\AI\include\RandomAI.h" />
+    <ClInclude Include="Game\include\Board.h" />
+    <ClInclude Include="Game\include\Constants.h" />
+    <ClInclude Include="Game\include\Person.h" />
+    <ClInclude Include="Game\include\Player.h" />
+    <ClInclude Include="Game\include\UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

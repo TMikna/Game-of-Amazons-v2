@@ -1,6 +1,6 @@
-#include "AlfaBetaAI_sssi.h"
+#include "..\include\AlfaBetaAI_sssiie.h"
 
-void AlfaBetaAI_sssi::moveAmazon()
+void AlfaBetaAI_sssiie::moveAmazon()
 {
 	int maxDepth = c::MAX_SEARCH_DEPTH;
 	// use copy so searching process do not disturb the original game state
@@ -41,7 +41,7 @@ void AlfaBetaAI_sssi::moveAmazon()
 	board->moveAmazon(oldPos, newPos);
 }
 
-void AlfaBetaAI_sssi::shootArrow()
+void AlfaBetaAI_sssiie::shootArrow()
 {
 	int maxDepth = c::MAX_SEARCH_DEPTH;
 	// use copy so searching process do not disturb the original game state
@@ -79,7 +79,7 @@ void AlfaBetaAI_sssi::shootArrow()
 
 // Is it better to find best move and then best arrow shot for it - CURRENT
 // AlfaBetaArrow() is second half of it
-inline float AlfaBetaAI_sssi::AlfaBeta(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer)
+inline float AlfaBetaAI_sssiie::AlfaBeta(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer)
 {
 	// moved into each player's section since my evaluation needs to know who's moving next
 	//if (depth == 0){ return Evaluate(searchBoard) }
@@ -118,10 +118,10 @@ inline float AlfaBetaAI_sssi::AlfaBeta(Board* searchBoard, int depth, float alph
 	{	// for Minimizer player  
 		if (depth == 0 || !searchBoard->hasMove(oppositeTeamColor))				// Reached decsired depth or end of the game
 			return Evaluate(searchBoard, oppositeTeamColor);
-			// it is not deeded in arrow part, because it gets into arroiw parf from amazon part and here depth is not reduced, also game cannot end
+		// it is not deeded in arrow part, because it gets into arroiw parf from amazon part and here depth is not reduced, also game cannot end
 
 
-		//AmazonMove worstMove;
+	//AmazonMove worstMove;
 		float minEva = std::numeric_limits<float>::max();						 // +infinity (closest we can get)
 		auto possibleMoves = searchBoard->findAllMoves(oppositeTeamColor);
 
@@ -147,7 +147,7 @@ inline float AlfaBetaAI_sssi::AlfaBeta(Board* searchBoard, int depth, float alph
 }
 
 
-inline float AlfaBetaAI_sssi::AlfaBetaArrow(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer, AmazonMove move)
+inline float AlfaBetaAI_sssiie::AlfaBetaArrow(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer, AmazonMove move)
 {
 	// moved into each player's section since my evaluation needs to know who's moving next
 	//if (depth == 0){ return Evaluate(searchBoard) }
@@ -174,7 +174,7 @@ inline float AlfaBetaAI_sssi::AlfaBetaArrow(Board* searchBoard, int depth, float
 
 	else
 	{	// for Minimizer player  
-		
+
 		float minEvaArrow = std::numeric_limits<float>::max();			    // +infinity (closest we can get with float)
 		auto possibleArrows = searchBoard->findAllMovesFrom(move.to);
 
@@ -198,23 +198,35 @@ inline float AlfaBetaAI_sssi::AlfaBetaArrow(Board* searchBoard, int depth, float
 
 
 // Editing Evaluation formula no possible move case in AlfaBetaAI_ss should be reviewed
-inline float AlfaBetaAI_sssi::Evaluate(Board* board, int nextMovingTeamColor)
+inline float AlfaBetaAI_sssiie::Evaluate(Board* board, int nextMovingTeamColor)
 {
-	float bias = 0.25;
+
+	float cof1 = 0.3;
+	float cof2 = 1 - cof1;
+
+	float bias = 0.5;
 	if (nextMovingTeamColor == teamColor)
 		bias *= -1;
 	int movCount = board->countAllMoves(teamColor);
 	int enemyMovCount = board->countAllMoves(oppositeTeamColor);
 
+	int movDirections = board->allPossibleDirections(teamColor);
+	int enemyMovDirections = board->allPossibleDirections(oppositeTeamColor);
+
 	// evaluation = moves difference divided by moves sum
 	// evaluaion range [-1;1] 0 is neutral, is positive - player is in better possition. The closer to 1 the better. Same the more negative the worse position it is
-	float evaluation = (float(movCount - enemyMovCount) + bias) / (float(movCount + enemyMovCount) + std::abs(bias));
+	float mowEvaluation = (float(movCount - enemyMovCount) + bias) / (float(movCount + enemyMovCount) + std::abs(bias));
 	// bias for: it can happen that there's 0 free spaces. Then the one moving next loses
 	// It might also help getting close to such position
+
+	float dirEvaluation = (float(movDirections - enemyMovDirections) + bias) / (float(movDirections + enemyMovDirections) + std::abs(bias));
+
+	float evaluation = cof1*mowEvaluation + cof2*dirEvaluation;
+
 	return evaluation;
 }
 
-bool AlfaBetaAI_sssi::hasPossibleMove()
+bool AlfaBetaAI_sssiie::hasPossibleMove()
 {
 	return board->hasMove(teamColor);
 }

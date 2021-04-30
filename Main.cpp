@@ -1,18 +1,20 @@
 //UI based on chess tutorial: https://www.youtube.com/watch?v=_4EuZI8Q8cs
 #include <iostream>
-#include "Board.h"
-#include "UI.h"
-#include "Person.h"
-#include "RandomAI.h"
-#include "AlfaBetaAI_ss.h"
-#include "AlfaBetaAI_fs.h"
-
 
 #include <chrono>  // for high_resolution_clock
 #include <algorithm>
-#include "AlfaBetaAI_sssi.h"
 #include <thread>
-#include "AlfaBetaAI_sssiie.h"
+
+#include "Game/include/Board.h"
+#include "Game/include/UI.h"
+#include "Game/include/Person.h"
+#include "Game/include/Person.h"
+#include "Game/AI/include/RandomAI.h"
+#include "Game/AI/include/AlfaBetaAI_ss.h"
+#include "Game/AI/include/AlfaBetaAI_sssi.h"
+#include "Game/AI/include/AlfaBetaAI_sssiie.h"
+#include "Game/AI/include/AlfaBetaAI_fs.h"
+#include "Game/AI/include/AlfaBetaAI_fs.h"
 
 
 

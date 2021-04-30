@@ -1,4 +1,5 @@
-#include "AlfaBetaAI_fs.h"
+#include "../include/AlfaBetaAI_fs.h"
+#include "../../include/Board.h"
 
 void AlfaBetaAI_fs::moveAmazon()
 {

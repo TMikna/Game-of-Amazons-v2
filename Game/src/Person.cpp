@@ -1,4 +1,4 @@
-#include "Person.h"
+#include "..\include\Person.h"
 
 void Person::moveAmazon() {
 	bool isMoveAllowed = false;

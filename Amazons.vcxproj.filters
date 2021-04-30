@@ -24,66 +24,66 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Board.cpp">
+    <ClCompile Include="Game\src\Board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UI.cpp">
+    <ClCompile Include="Game\src\UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Game\src\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Person.cpp">
+    <ClCompile Include="Game\src\Person.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AlfaBetaAI_fs.cpp">
+    <ClCompile Include="Game\AI\src\AlfaBetaAI_fs.cpp">
       <Filter>Source Files\AIs</Filter>
     </ClCompile>
-    <ClCompile Include="RandomAI.cpp">
+    <ClCompile Include="Game\AI\src\RandomAI.cpp">
       <Filter>Source Files\AIs</Filter>
     </ClCompile>
-    <ClCompile Include="AlfaBetaAI_ss.cpp">
+    <ClCompile Include="Game\AI\src\AlfaBetaAI_ss.cpp">
       <Filter>Source Files\AIs</Filter>
     </ClCompile>
-    <ClCompile Include="AlfaBetaAI_sssi.cpp">
+    <ClCompile Include="Game\AI\src\AlfaBetaAI_sssi.cpp">
       <Filter>Source Files\AIs</Filter>
     </ClCompile>
-    <ClCompile Include="AlfaBetaAI_sssiie.cpp">
+    <ClCompile Include="Game\AI\src\AlfaBetaAI_sssiie.cpp">
       <Filter>Source Files\AIs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Board.h">
+    <ClInclude Include="Game\include\Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UI.h">
+    <ClInclude Include="Game\include\UI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="Game\include\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Person.h">
+    <ClInclude Include="Game\include\Person.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Constants.h">
+    <ClInclude Include="Game\include\Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AmazonMove.h">
+    <ClInclude Include="Game\include\AmazonMove.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AlfaBetaAI_fs.h">
+    <ClInclude Include="Game\AI\include\AlfaBetaAI_fs.h">
       <Filter>Header Files\AIs</Filter>
     </ClInclude>
-    <ClInclude Include="RandomAI.h">
+    <ClInclude Include="Game\AI\include\RandomAI.h">
       <Filter>Header Files\AIs</Filter>
     </ClInclude>
-    <ClInclude Include="AlfaBetaAI_ss.h">
+    <ClInclude Include="Game\AI\include\AlfaBetaAI_ss.h">
       <Filter>Header Files\AIs</Filter>
     </ClInclude>
-    <ClInclude Include="AlfaBetaAI_sssi.h">
+    <ClInclude Include="Game\AI\include\AlfaBetaAI_sssi.h">
       <Filter>Header Files\AIs</Filter>
     </ClInclude>
-    <ClInclude Include="AlfaBetaAI_sssiie.h">
+    <ClInclude Include="Game\AI\include\AlfaBetaAI_sssiie.h">
       <Filter>Header Files\AIs</Filter>
     </ClInclude>
   </ItemGroup>
