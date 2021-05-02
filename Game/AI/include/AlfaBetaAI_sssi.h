@@ -1,12 +1,13 @@
 #pragma once
 #include "../../include/Player.h"
 #include "../../include/UI.h"
+#include "Evaluations.h"
 class AlfaBetaAI_sssi :
     public Player
 {
 
 public:
-	AlfaBetaAI_sssi(Board* board, UI* ui, int teamColor) :Player(teamColor)
+	AlfaBetaAI_sssi(Board* board, Evaluation* evaluation, UI* ui, short teamColor) :Player(teamColor)
 	{
 		this->board = board;
 		this->ui = ui;
@@ -22,11 +23,12 @@ private:
 	Board* board;
 	Position oldPos, newPos, arrowPos;
 	AmazonMove move; //holds oldPos and newPos
-	// int** amazons; //amazons, controlled by AI;
+	Evaluation* evaluation;
 
-	inline float AlfaBeta(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer);
-	inline float AlfaBetaArrow(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer, AmazonMove bestMove);
-	inline float Evaluate(Board* board, int nextMovingTeamColor);
+	// short** amazons; //amazons, controlled by AI;
+
+	inline float AlfaBeta(Board* searchBoard, short depth, float alpha, float beta, bool maximizingPlayer);
+	inline float AlfaBetaArrow(Board* searchBoard, short depth, float alpha, float beta, bool maximizingPlayer, AmazonMove bestMove);
 
 };
 

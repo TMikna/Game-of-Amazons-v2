@@ -30,16 +30,16 @@ void Board::printBoard()
 //	return moves;
 //}
 
-std::vector<AmazonMove> Board::findAllMoves(int teamColor)
+std::vector<AmazonMove> Board::findAllMoves(short teamColor)
 {
 	std::vector<AmazonMove> moves;
 	moves.reserve(14);
 
 	if (teamColor == WHITES)
-		for(int i = 0; i< wAmazonsPositions.size(); i++)
+		for(short i = 0; i< wAmazonsPositions.size(); i++)
 			findAllMovesFrom(wAmazonsPositions[i], &moves);
 	else if (teamColor == BLACKS)
-		for (int i = 0; i < bAmazonsPositions.size(); i++)
+		for (short i = 0; i < bAmazonsPositions.size(); i++)
 			findAllMovesFrom(bAmazonsPositions[i], &moves);
 
 
@@ -55,8 +55,8 @@ std::vector<AmazonMove> Board::findAllMoves(int teamColor)
 // find all possible moves from a position
 inline void Board::findAllMovesFrom(Position pos, std::vector<AmazonMove>* moves)
 {
-	int k;
-	int l;
+	int_fast8_t k;
+	int_fast8_t l;
 
 	// go down;
 	k = pos.x;
@@ -114,8 +114,8 @@ std::vector<AmazonMove> Board::findAllMovesFrom(Position pos)
 	std::vector<AmazonMove> moves;
 	moves.reserve(9);
 
-	int k;
-	int l;
+	int_fast8_t k;
+	int_fast8_t l;
 
 	// go down;
 	k = pos.x;
@@ -169,15 +169,15 @@ std::vector<AmazonMove> Board::findAllMovesFrom(Position pos)
 }
 
 //Same as findAllMoves but only counting instead putting into array
-int Board::countAllMoves(int teamColor)
+short Board::countAllMoves(short teamColor)
 {
-	int movesCount = 0;
+	short movesCount = 0;
 
 	if (teamColor == WHITES)
-		for (int i = 0; i < wAmazonsPositions.size(); i++)
+		for (short i = 0; i < wAmazonsPositions.size(); i++)
 			countAllMovesFrom(wAmazonsPositions[i], &movesCount);
 	else if (teamColor == BLACKS)
-		for (int i = 0; i < bAmazonsPositions.size(); i++)
+		for (short i = 0; i < bAmazonsPositions.size(); i++)
 			countAllMovesFrom(bAmazonsPositions[i], &movesCount);
 
 	/*for (int i = 0; i < c::BOARD_SIZE; i++)
@@ -191,13 +191,13 @@ int Board::countAllMoves(int teamColor)
 }
 
 // find all possible moves from a position
-int Board::countAllMovesFrom(Position pos, int *movesCount)
+short Board::countAllMovesFrom(Position pos, short*movesCount)
 {
 	if (!movesCount)
 		(*movesCount) = 0;
 
-	int k;
-	int l;
+	short k;
+	short l;
 
 	// go down;
 	k = pos.x;
@@ -250,17 +250,17 @@ int Board::countAllMovesFrom(Position pos, int *movesCount)
 	return *movesCount;
 }
 
-int** Board::getAmazons()
+short** Board::getAmazons()
 {
-	int** amazons = 0;
-	amazons = new int* [c::AMAZONS];
-	int count = 0;
-	for (int i = 0; i < c::BOARD_SIZE; i++)
-		for (int j = 0; j < c::BOARD_SIZE; j++)
+	short** amazons = 0;
+	amazons = new short* [c::AMAZONS];
+	short count = 0;
+	for (short i = 0; i < c::BOARD_SIZE; i++)
+		for (short j = 0; j < c::BOARD_SIZE; j++)
 			if (board[i][j] == WHITES || board[i][j] == BLACKS)
 			{
 				// it should be 8 amazons (ar as much as c::AMAZONS defines) so array gets filled and not overfilled
-				amazons[count] = new int[] {board[i][j], i, j}; // amazon type and it's position
+				amazons[count] = new short[] {board[i][j], i, j}; // amazon type and it's position
 				count++;
 			}
 	return amazons;
@@ -271,8 +271,8 @@ void Board::setAmazonsArrays()
 	wAmazonsPositions.clear();
 	bAmazonsPositions.clear();
 
-	for (int i = 0; i < c::BOARD_SIZE; i++)
-		for (int j = 0; j < c::BOARD_SIZE; j++)
+	for (int_fast8_t i = 0; i < c::BOARD_SIZE; i++)
+		for (int_fast8_t j = 0; j < c::BOARD_SIZE; j++)
 			if (board[i][j] == WHITES)
 				wAmazonsPositions.push_back(Position(i, j));
 			else if (board[i][j] == BLACKS)
@@ -280,16 +280,16 @@ void Board::setAmazonsArrays()
 }
 
 
-int** Board::getAmazons(int teamColor)
+short** Board::getAmazons(short teamColor)
 {
-	int** amazons = 0;
-	amazons = new int* [c::AMAZONS/2]; //one player has 4 or half of the amazons on the board
-	int count = 0;
-	for (int i = 0; i < c::BOARD_SIZE * c::BOARD_SIZE; i++)
+	short** amazons = 0;
+	amazons = new short* [c::AMAZONS/2]; //one player has 4 or half of the amazons on the board
+	short count = 0;
+	for (short i = 0; i < c::BOARD_SIZE * c::BOARD_SIZE; i++)
 		if (board[i / c::BOARD_SIZE][i % c::BOARD_SIZE] == teamColor)
 		{
 			// it should be 4 amazons (ar half of what c::AMAZONS defines) so array gets filled and not overfilled
-			amazons[count] = new int[] {i / c::BOARD_SIZE, i % c::BOARD_SIZE}; // amazon position (caller knows the type (teamColor)
+			amazons[count] = new short[] {i / c::BOARD_SIZE, i % c::BOARD_SIZE}; // amazon position (caller knows the type (teamColor)
 			count++;
 		}
 	return amazons;
@@ -303,12 +303,12 @@ bool Board::isMoveAllowed(Position oldPos, Position newPos)
 	if (!isOnBoard(newPos))
 		return false;
 
-	int y = oldPos.y;
-	int x = oldPos.x;
-	int yNew = newPos.y;
-	int xNew = newPos.x;
+	short y = oldPos.y;
+	short x = oldPos.x;
+	short yNew = newPos.y;
+	short xNew = newPos.x;
 
-	int dk, dl;
+	short dk, dl;
 	if (x < xNew)
 		dk = 1;
 	else if (x > xNew)
@@ -334,8 +334,8 @@ bool Board::isMoveAllowed(Position oldPos, Position newPos)
 
 inline bool Board::isQueenTrajectory(Position oldPos, Position newPos)
 {
-	int dx = abs(newPos.x - oldPos.x);
-	int dy = abs(newPos.y - oldPos.y);
+	short dx = abs(newPos.x - oldPos.x);
+	short dy = abs(newPos.y - oldPos.y);
 	if (dx == 0 && dy == 0)
 		return false; // can't move to the same position
 	if (dx == 0 || dy == 0)
@@ -360,10 +360,10 @@ inline bool Board::isOnBoard(Position pos)
 	return true; // not above, not below, not too left or too right - pos is on the board
 }
 // returns true if given player has at least one possible move with any of his amazons
-bool Board::hasMove(int teamColor)
+bool Board::hasMove(short teamColor)
 {
-	for (int i = 0; i < c::BOARD_SIZE; i++)
-		for (int j = 0; j < c::BOARD_SIZE; j++)
+	for (int_fast8_t i = 0; i < c::BOARD_SIZE; i++)
+		for (int_fast8_t j = 0; j < c::BOARD_SIZE; j++)
 			if (board[i][j] == teamColor)
 			{
 				if (hasMove(Position(i, j)))
@@ -375,14 +375,14 @@ bool Board::hasMove(int teamColor)
 // returns true if given amazon has at least one possible move
 bool Board::hasMove(Position amazon)
 {
-	for (int i = -1; i <= 1; i++)
-		for (int j = -1; j <= 1; j++)
+	for (short i = -1; i <= 1; i++)
+		for (short j = -1; j <= 1; j++)
 		{
 			// if (i == j == 0)      //TODO: investigate seems compare i and j, then the result (boolean) compares with 0. So if j != i -> false == false -> true
 			if (i == 0 && j == 0) //the spot amazon is standing. Not necessary since it is always not true
 				continue;
-			int x = amazon.x + i;
-			int y = amazon.y + j;
+			short x = amazon.x + i;
+			short y = amazon.y + j;
 			if ((x < 0 || x >= c::BOARD_SIZE) || (y < 0 || y >= c::BOARD_SIZE))
 				continue;		  // space is not on the board
 			if (board[x][y] == 0) // is space empty
@@ -391,31 +391,31 @@ bool Board::hasMove(Position amazon)
 	return false;
 }
 
-int Board::allPossibleDirections(int teamColor) 
+short Board::allPossibleDirections(short teamColor)
 {
-	int directionsCount = 0;
+	short directionsCount = 0;
 
 	if (teamColor == WHITES)
-		for (int i = 0; i < wAmazonsPositions.size(); i++)
+		for (short i = 0; i < wAmazonsPositions.size(); i++)
 			directionsCount += possibleDirections(wAmazonsPositions[i]);
 	else if (teamColor == BLACKS)
-		for (int i = 0; i < bAmazonsPositions.size(); i++)
+		for (short i = 0; i < bAmazonsPositions.size(); i++)
 			directionsCount += possibleDirections(bAmazonsPositions[i]);
 
 	return directionsCount;
 }
 
-int Board::possibleDirections(Position amazon)
+short Board::possibleDirections(Position amazon)
 {
-	int directions = 0;
-	for (int i = -1; i <= 1; i++)
-		for (int j = -1; j <= 1; j++)
+	short directions = 0;
+	for (short i = -1; i <= 1; i++)
+		for (short j = -1; j <= 1; j++)
 		{
 			// if (i == j == 0)      //TODO: investigate seems compare i and j, then the result (boolean) compares with 0. So if j != i -> false == false -> true
 			if (i == 0 && j == 0) //the spot amazon is standing. Not necessary since it is always not true
 				continue;
-			int x = amazon.x + i;
-			int y = amazon.y + j;
+			short x = amazon.x + i;
+			short y = amazon.y + j;
 			if ((x < 0 || x >= c::BOARD_SIZE) || (y < 0 || y >= c::BOARD_SIZE))
 				continue;		  // space is not on the board
 			if (board[x][y] == 0) // is space empty
@@ -430,13 +430,13 @@ void Board::moveAmazon(Position oldPos, Position newPos)
 	board[newPos.x][newPos.y] = board[oldPos.x][oldPos.y]; // move amazon
 	board[oldPos.x][oldPos.y] = 0; // empty old place
 
-	for(int i = 0; i< wAmazonsPositions.size(); i++)
+	for(short i = 0; i< wAmazonsPositions.size(); i++)
 		if (wAmazonsPositions[i] == oldPos)
 		{
 			wAmazonsPositions[i] = newPos;
 			return;
 		}
-	for (int i = 0; i < bAmazonsPositions.size(); i++)
+	for (short i = 0; i < bAmazonsPositions.size(); i++)
 		if (bAmazonsPositions[i] == oldPos)
 		{
 			bAmazonsPositions[i] = newPos;

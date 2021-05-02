@@ -15,7 +15,7 @@ UI::UI()
     window.create(VideoMode(cUI::BOARD_WIDTH, cUI::BOARD_HEIGHT), "The Game of the Amazons");
 }
 
-void UI::loadBoard(int** amazonsPos, std::string boardPath, std::string queensPath, std::string arrowPath, std::string winMsgPath)
+void UI::loadBoard(short** amazonsPos, std::string boardPath, std::string queensPath, std::string arrowPath, std::string winMsgPath)
 {
 	tBoard.loadFromFile(boardPath);
 	sBoard.setTexture(tBoard, true);
@@ -48,14 +48,14 @@ void UI::display()
 	window.display();
 }
 
-void UI::loadQueens(int** amazonsPos)
+void UI::loadQueens(short** amazonsPos)
 {
-	for (int k = 0; k < c::AMAZONS; k++)
+	for (short k = 0; k < c::AMAZONS; k++)
 		{
 			sQueens[k].setTexture(tQueens);
-			int type = amazonsPos[k][0];
-			int i = amazonsPos[k][1];
-			int j = amazonsPos[k][2];
+			short type = amazonsPos[k][0];
+			short i = amazonsPos[k][1];
+			short j = amazonsPos[k][2];
 			sQueens[k].setTextureRect(IntRect(0, cUI::SQUARE_SIZE * (type % 2), cUI::SQUARE_SIZE, cUI::SQUARE_SIZE));
 			sQueens[k].setPosition(cUI::SQUARE_SIZE * j, cUI::SQUARE_SIZE * i);
 		}
@@ -143,7 +143,7 @@ Position UI::pickAmazon()
 						Position pos = Position(winPos.y / cUI::SQUARE_SIZE, winPos.x / cUI::SQUARE_SIZE);
 						return pos;
 					}
-	 }
+	 } 
 }
 
 Position UI::dropAmazon()

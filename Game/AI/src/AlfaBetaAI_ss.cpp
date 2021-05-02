@@ -2,7 +2,7 @@
 
 void AlfaBetaAI_ss::moveAmazon()
 {
-	int maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = c::MAX_SEARCH_DEPTH;
 	// use copy so searching process do not disturb the original game state
 	Board boardCopy(board->getBoardState());
 	AmazonMove nextMove;
@@ -45,7 +45,7 @@ void AlfaBetaAI_ss::moveAmazon()
 
 void AlfaBetaAI_ss::shootArrow()
 {
-	int maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = c::MAX_SEARCH_DEPTH;
 	// use copy so searching process do not disturb the original game state
 	Board boardCopy(board->getBoardState());
 	AmazonMove arrowShoot;
@@ -81,7 +81,7 @@ void AlfaBetaAI_ss::shootArrow()
 
 //Is it better to find best move and then best arrow shot for it - CURRENT
 //Or best move + arrow (find all moves and all possible arrow possitions and find the best? This sounds better and easier to implement but a lot move performance expensive
-inline float AlfaBetaAI_ss::AlfaBeta(Board *searchBoard, int depth, float alpha, float beta, bool maximizingPlayer)
+inline float AlfaBetaAI_ss::AlfaBeta(Board *searchBoard, short depth, float alpha, float beta, bool maximizingPlayer)
 {
 	// moved into each player's section since my evaluation needs to know who's moving next
 	//if (depth == 0){ return Evaluate(searchBoard) }
@@ -89,7 +89,7 @@ inline float AlfaBetaAI_ss::AlfaBeta(Board *searchBoard, int depth, float alpha,
 	if (maximizingPlayer)      // for Maximizer Player  
 	{
 		if (depth == 0 || !searchBoard->hasMove(teamColor)) // Reached decsired depth or end of the game
-			return Evaluate(searchBoard, teamColor);
+			return evaluation->Evaluate(searchBoard, teamColor, teamColor, oppositeTeamColor);
 
 		AmazonMove bestMove;
 		float maxEva = -std::numeric_limits<float>::max(); // -infinity (closest we can get)
@@ -134,7 +134,8 @@ inline float AlfaBetaAI_ss::AlfaBeta(Board *searchBoard, int depth, float alpha,
 	else
 	{	// for Minimizer player  
 		if (depth == 0 || !searchBoard->hasMove(oppositeTeamColor)) // Reached decsired depth or end of the game
-			return Evaluate(searchBoard, oppositeTeamColor);
+			return evaluation->Evaluate(searchBoard, oppositeTeamColor, teamColor, oppositeTeamColor);
+
 
 		AmazonMove worstMove;
 		float minEva = std::numeric_limits<float>::max(); // +infinity (closest we can get)
@@ -176,23 +177,6 @@ inline float AlfaBetaAI_ss::AlfaBeta(Board *searchBoard, int depth, float alpha,
 		searchBoard->moveAmazon(worstMove.to, worstMove.from);			    //Undo the best move before leaving
 		return minEvaArrow;
 	}
-}
-
-// Editing Evaluation formula no possible move case in AlfaBetaAI_ss should be reviewed
-inline float AlfaBetaAI_ss::Evaluate(Board* board, int nextMovingTeamColor)
-{
-	float bias = 0.5;
-	if (nextMovingTeamColor == teamColor)
-		bias *= -1;
-	int movCount = board->countAllMoves(teamColor);
-	int enemyMovCount = board->countAllMoves(oppositeTeamColor);
-
-	// evaluation = moves difference divided by moves sum
-	// evaluaion range [-1;1] 0 is neutral, is positive - player is in better possition. The closer to 1 the better. Same the more negative the worse position it is
-	float evaluation = (float(movCount - enemyMovCount) + bias) / (float(movCount + enemyMovCount) + std::abs(bias));
-	// bias for: it can happen that there's 0 free spaces. Then the one moving next loses
-	// It might also help getting close to such position
-	return evaluation;
 }
 
 bool AlfaBetaAI_ss::hasPossibleMove()

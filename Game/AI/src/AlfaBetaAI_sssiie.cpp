@@ -1,8 +1,12 @@
 #include "..\include\AlfaBetaAI_sssiie.h"
 
+///
+// Unused anymore because it's same as AlfaBetaAI_sssi, only different evaluation.
+///
+
 void AlfaBetaAI_sssiie::moveAmazon()
 {
-	int maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = c::MAX_SEARCH_DEPTH;
 	// use copy so searching process do not disturb the original game state
 	Board boardCopy(board->getBoardState());
 	AmazonMove nextMove;
@@ -43,7 +47,7 @@ void AlfaBetaAI_sssiie::moveAmazon()
 
 void AlfaBetaAI_sssiie::shootArrow()
 {
-	int maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = c::MAX_SEARCH_DEPTH;
 	// use copy so searching process do not disturb the original game state
 	Board boardCopy(board->getBoardState());
 	AmazonMove arrowShoot;
@@ -51,7 +55,7 @@ void AlfaBetaAI_sssiie::shootArrow()
 #pragma region Modilied 2nd half of 1st layer of alfa-beta search
 	float maxEvaArrow = -std::numeric_limits<float>::max();              // -infinity (closest we can get)
 	float alpha = -std::numeric_limits<float>::max();					 // -infinity (closest we can get)
-	float beta = std::numeric_limits<float>::max();						 // +infinity (closest we can get)
+	float beta = std::numeric_limits<float>::max();		     				 // +infinity (closest we can get)
 	auto possibleArrows = boardCopy.findAllMovesFrom(newPos);
 	for (auto& move : possibleArrows)                                    // access by reference to avoid copying
 	{
@@ -79,7 +83,7 @@ void AlfaBetaAI_sssiie::shootArrow()
 
 // Is it better to find best move and then best arrow shot for it - CURRENT
 // AlfaBetaArrow() is second half of it
-inline float AlfaBetaAI_sssiie::AlfaBeta(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer)
+inline float AlfaBetaAI_sssiie::AlfaBeta(Board* searchBoard, short depth, float alpha, float beta, bool maximizingPlayer)
 {
 	// moved into each player's section since my evaluation needs to know who's moving next
 	//if (depth == 0){ return Evaluate(searchBoard) }
@@ -147,7 +151,7 @@ inline float AlfaBetaAI_sssiie::AlfaBeta(Board* searchBoard, int depth, float al
 }
 
 
-inline float AlfaBetaAI_sssiie::AlfaBetaArrow(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer, AmazonMove move)
+inline float AlfaBetaAI_sssiie::AlfaBetaArrow(Board* searchBoard, short depth, float alpha, float beta, bool maximizingPlayer, AmazonMove move)
 {
 	// moved into each player's section since my evaluation needs to know who's moving next
 	//if (depth == 0){ return Evaluate(searchBoard) }
@@ -198,20 +202,20 @@ inline float AlfaBetaAI_sssiie::AlfaBetaArrow(Board* searchBoard, int depth, flo
 
 
 // Editing Evaluation formula no possible move case in AlfaBetaAI_ss should be reviewed
-inline float AlfaBetaAI_sssiie::Evaluate(Board* board, int nextMovingTeamColor)
+inline float AlfaBetaAI_sssiie::Evaluate(Board* board, short nextMovingTeamColor)
 {
 
-	float cof1 = 0.3;
+	float cof1 = 0.3f;
 	float cof2 = 1 - cof1;
 
 	float bias = 0.5;
 	if (nextMovingTeamColor == teamColor)
 		bias *= -1;
-	int movCount = board->countAllMoves(teamColor);
-	int enemyMovCount = board->countAllMoves(oppositeTeamColor);
+	short movCount = board->countAllMoves(teamColor);
+	short enemyMovCount = board->countAllMoves(oppositeTeamColor);
 
-	int movDirections = board->allPossibleDirections(teamColor);
-	int enemyMovDirections = board->allPossibleDirections(oppositeTeamColor);
+	short movDirections = board->allPossibleDirections(teamColor);
+	short enemyMovDirections = board->allPossibleDirections(oppositeTeamColor);
 
 	// evaluation = moves difference divided by moves sum
 	// evaluaion range [-1;1] 0 is neutral, is positive - player is in better possition. The closer to 1 the better. Same the more negative the worse position it is

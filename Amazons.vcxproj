@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\src\Amazons.cpp" />
     <ClCompile Include="Game\AI\src\AlfaBetaAI_ss.cpp" />
     <ClCompile Include="Game\AI\src\AlfaBetaAI_fs.cpp" />
     <ClCompile Include="Game\AI\src\AlfaBetaAI_sssi.cpp" />
@@ -161,8 +162,11 @@
     <ClCompile Include="Game\src\Person.cpp" />
     <ClCompile Include="Game\src\Player.cpp" />
     <ClCompile Include="Game\src\UI.cpp" />
+    <ClCompile Include="Game\AI\src\Evaluations.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\include\Amazons.h" />
+    <ClInclude Include="Game\AI\include\Evaluations.h" />
     <ClInclude Include="Game\AI\include\AlfaBetaAI_ss.h" />
     <ClInclude Include="Game\AI\include\AlfaBetaAI_fs.h" />
     <ClInclude Include="Game\AI\include\AlfaBetaAI_sssi.h" />

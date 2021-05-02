@@ -13,12 +13,12 @@ public:
 		shootArrow();
 	}
 
-	int getTeamColor()
+	short getTeamColor()
 	{
 		return teamColor;
 	}
 
-	Player(int teamColor)
+	Player(short teamColor)
 	{
 		this->teamColor = teamColor;
 		this->oppositeTeamColor = (teamColor * 2) % 3;
@@ -33,8 +33,8 @@ public:
 
 
 protected:
-	int teamColor = -1; // whites or blacks, -1 = neither
-	int oppositeTeamColor = -1; // whites or blacks, -1 = neither
+	short teamColor = -1; // whites or blacks, -1 = neither
+	short oppositeTeamColor = -1; // whites or blacks, -1 = neither
 
 private:
 };

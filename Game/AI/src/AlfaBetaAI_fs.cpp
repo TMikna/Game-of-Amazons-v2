@@ -3,7 +3,7 @@
 
 void AlfaBetaAI_fs::moveAmazon()
 {
-	int maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = c::MAX_SEARCH_DEPTH;
 	// use copy so searching process do not disturb the original game state
 	Board boardCopy(board->getBoardState());
 
@@ -66,7 +66,7 @@ void AlfaBetaAI_fs::shootArrow()
 
 
 //Checking all possible move are arrow shoot combinations (except those who are cut by albe-beta pruning)
-inline float AlfaBetaAI_fs::AlfaBeta(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer)
+inline float AlfaBetaAI_fs::AlfaBeta(Board* searchBoard, short depth, float alpha, float beta, bool maximizingPlayer)
 {
 	// moved into each player's section since my evaluation needs to know who's moving next
 	//if (depth == 0){ return Evaluate(searchBoard) }
@@ -74,7 +74,7 @@ inline float AlfaBetaAI_fs::AlfaBeta(Board* searchBoard, int depth, float alpha,
 	if (maximizingPlayer)      // for Maximizer Player  
 	{
 		if (depth == 0 || !searchBoard->hasMove(teamColor)) // Reached decsired depth or end of the game
-			return Evaluate(searchBoard, teamColor);
+			return evaluation->Evaluate(searchBoard, teamColor, teamColor, oppositeTeamColor);
 
 		float maxEva = -std::numeric_limits<float>::max(); // -infinity (closest we can get)
 		auto possibleMoves = searchBoard->findAllMoves(teamColor);
@@ -109,7 +109,7 @@ inline float AlfaBetaAI_fs::AlfaBeta(Board* searchBoard, int depth, float alpha,
 	else
 	{	// for Minimizer player  
 		if (depth == 0 || !searchBoard->hasMove(oppositeTeamColor)) // Reached desired depth or end of the game
-			return Evaluate(searchBoard, oppositeTeamColor);
+			return evaluation->Evaluate(searchBoard, oppositeTeamColor, teamColor, oppositeTeamColor);
 
 		float minEva = std::numeric_limits<float>::max(); // +infinity (closest we can get)
 		auto possibleMoves = searchBoard->findAllMoves(oppositeTeamColor);
@@ -138,23 +138,6 @@ inline float AlfaBetaAI_fs::AlfaBeta(Board* searchBoard, int depth, float alpha,
 		}
 		return minEva;
 	}
-}
-
-// Editing Evaluation formula no possible move case in AlfaBetaAI_ss should be reviewed
-inline float AlfaBetaAI_fs::Evaluate(Board* board, int nextMovingTeamColor)
-{
-	float bias = 0.5;
-	if (nextMovingTeamColor == teamColor)
-		bias *= -1;
-	int movCount = board->countAllMoves(teamColor);
-	int enemyMovCount = board->countAllMoves(oppositeTeamColor);
-
-	// evaluation = moves difference divided by moves sum
-	// evaluaion range [-1;1] 0 is neutral, is positive - player is in better possition. The closer to 1 the better. Same the more negative the worse position it is
-	float evaluation = (float(movCount - enemyMovCount) + bias) / (float(movCount + enemyMovCount) + std::abs(bias));
-	// bias for: it can happen that there's 0 free spaces. Then the one moving next loses
-	// It might also help getting close to such position
-	return evaluation;
 }
 
 bool AlfaBetaAI_fs::hasPossibleMove()

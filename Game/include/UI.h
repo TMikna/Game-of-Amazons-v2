@@ -14,7 +14,7 @@ public:
 	RenderWindow window;
 
 	UI();
-	void loadBoard(int** amazonsPos, std::string boardPath, std::string queensPath, std::string arrowPath, std::string winMsgPath);
+	void loadBoard(short** amazonsPos, std::string boardPath, std::string queensPath, std::string arrowPath, std::string winMsgPath);
 	void display();
 
 	Position pickAmazon();
@@ -39,7 +39,7 @@ private:
 	Texture tBoard, tQueens, tArrow, tWinMsg;
 	Sprite sBoard, sQueens[c::AMAZONS], sArrows[c::MAX_ARROWS], sWinMsg[2];
 
-	void loadQueens(int** amazonsPos);
+	void loadQueens(short** amazonsPos);
 	void loadArrows();
 	void loadWinMsg();
 

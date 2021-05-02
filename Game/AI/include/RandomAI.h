@@ -6,7 +6,7 @@ class RandomAI :
 	public Player
 {
 public:
-	RandomAI(Board* board, UI* ui, int teamColor):Player(teamColor)
+	RandomAI(Board* board, UI* ui, short teamColor):Player(teamColor)
 	{
 		this->board = board;
 		this->ui = ui;
@@ -22,7 +22,7 @@ private:
 	Board* board;
 	Position oldPos, newPos, arrowPos;
 	AmazonMove move; //holds oldPos and newPos
-	// int** amazons; //amazons, controlled by AI;
+	// short** amazons; //amazons, controlled by AI;
 
-	inline int chooseMove(int max);
+	inline short chooseMove(short max);
 };

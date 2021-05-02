@@ -2,7 +2,7 @@
 
 void AlfaBetaAI_sssi::moveAmazon()
 {
-	int maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = c::MAX_SEARCH_DEPTH;
 	// use copy so searching process do not disturb the original game state
 	Board boardCopy(board->getBoardState());
 	AmazonMove nextMove;
@@ -43,7 +43,7 @@ void AlfaBetaAI_sssi::moveAmazon()
 
 void AlfaBetaAI_sssi::shootArrow()
 {
-	int maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = c::MAX_SEARCH_DEPTH;
 	// use copy so searching process do not disturb the original game state
 	Board boardCopy(board->getBoardState());
 	AmazonMove arrowShoot;
@@ -79,7 +79,7 @@ void AlfaBetaAI_sssi::shootArrow()
 
 // Is it better to find best move and then best arrow shot for it - CURRENT
 // AlfaBetaArrow() is second half of it
-inline float AlfaBetaAI_sssi::AlfaBeta(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer)
+inline float AlfaBetaAI_sssi::AlfaBeta(Board* searchBoard, short depth, float alpha, float beta, bool maximizingPlayer)
 {
 	// moved into each player's section since my evaluation needs to know who's moving next
 	//if (depth == 0){ return Evaluate(searchBoard) }
@@ -87,7 +87,8 @@ inline float AlfaBetaAI_sssi::AlfaBeta(Board* searchBoard, int depth, float alph
 	if (maximizingPlayer)      // for Maximizer Player  
 	{
 		if (depth == 0 || !searchBoard->hasMove(teamColor))					// Reached decsired depth or end of the game
-			return Evaluate(searchBoard, teamColor);
+			return evaluation->Evaluate(searchBoard, teamColor, teamColor, oppositeTeamColor);
+
 		// it is not deeded in arriw part, because it gets into arroiw parf from amazon part and here depth is not reduced, also game cannot end
 
 		//AmazonMove bestMove;
@@ -117,7 +118,8 @@ inline float AlfaBetaAI_sssi::AlfaBeta(Board* searchBoard, int depth, float alph
 	else
 	{	// for Minimizer player  
 		if (depth == 0 || !searchBoard->hasMove(oppositeTeamColor))				// Reached decsired depth or end of the game
-			return Evaluate(searchBoard, oppositeTeamColor);
+			return evaluation->Evaluate(searchBoard, oppositeTeamColor, teamColor, oppositeTeamColor);
+
 			// it is not deeded in arrow part, because it gets into arroiw parf from amazon part and here depth is not reduced, also game cannot end
 
 
@@ -147,7 +149,7 @@ inline float AlfaBetaAI_sssi::AlfaBeta(Board* searchBoard, int depth, float alph
 }
 
 
-inline float AlfaBetaAI_sssi::AlfaBetaArrow(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer, AmazonMove move)
+inline float AlfaBetaAI_sssi::AlfaBetaArrow(Board* searchBoard, short depth, float alpha, float beta, bool maximizingPlayer, AmazonMove move)
 {
 	// moved into each player's section since my evaluation needs to know who's moving next
 	//if (depth == 0){ return Evaluate(searchBoard) }
@@ -192,26 +194,6 @@ inline float AlfaBetaAI_sssi::AlfaBetaArrow(Board* searchBoard, int depth, float
 		}
 		return minEvaArrow;
 	}
-}
-
-
-
-
-// Editing Evaluation formula no possible move case in AlfaBetaAI_ss should be reviewed
-inline float AlfaBetaAI_sssi::Evaluate(Board* board, int nextMovingTeamColor)
-{
-	float bias = 0.25;
-	if (nextMovingTeamColor == teamColor)
-		bias *= -1;
-	int movCount = board->countAllMoves(teamColor);
-	int enemyMovCount = board->countAllMoves(oppositeTeamColor);
-
-	// evaluation = moves difference divided by moves sum
-	// evaluaion range [-1;1] 0 is neutral, is positive - player is in better possition. The closer to 1 the better. Same the more negative the worse position it is
-	float evaluation = (float(movCount - enemyMovCount) + bias) / (float(movCount + enemyMovCount) + std::abs(bias));
-	// bias for: it can happen that there's 0 free spaces. Then the one moving next loses
-	// It might also help getting close to such position
-	return evaluation;
 }
 
 bool AlfaBetaAI_sssi::hasPossibleMove()

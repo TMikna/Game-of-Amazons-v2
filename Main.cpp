@@ -1,25 +1,16 @@
 //UI based on chess tutorial: https://www.youtube.com/watch?v=_4EuZI8Q8cs
-#include <iostream>
 
-#include <chrono>  // for high_resolution_clock
-#include <algorithm>
-#include <thread>
-
-#include "Game/include/Board.h"
-#include "Game/include/UI.h"
-#include "Game/include/Person.h"
-#include "Game/include/Person.h"
-#include "Game/AI/include/RandomAI.h"
-#include "Game/AI/include/AlfaBetaAI_ss.h"
-#include "Game/AI/include/AlfaBetaAI_sssi.h"
-#include "Game/AI/include/AlfaBetaAI_sssiie.h"
-#include "Game/AI/include/AlfaBetaAI_fs.h"
-#include "Game/AI/include/AlfaBetaAI_fs.h"
+#include "Game//include/Amazons.h"
 
 
 
 int main()
 {
+	Amazons amazons;
+
+	amazons.loadBoard("images/Board10x10.png", "images/queens2.png", "images/arrow.png", "images/winMsg.png");
+	amazons.play(1);
+
 
 	//Board boardX;
 	//BoardArray testBoardState =
@@ -39,74 +30,16 @@ int main()
 	//	bool X = boardX.hasMove(BLACKS);
 	//}
 
-	Board board;
-	UI ui;
-	Person personw (&board, &ui, WHITES);
-	Person personb (&board, &ui, BLACKS);
-	RandomAI rAIw(&board, &ui, WHITES);
-	RandomAI rAIb(&board, &ui, BLACKS);
-	AlfaBetaAI_ss abAIsw(&board, &ui, WHITES);
-	AlfaBetaAI_ss abAIsb(&board, &ui, BLACKS);
-	AlfaBetaAI_sssi abAIssw(&board, &ui, WHITES);
-	AlfaBetaAI_sssi abAIssb(&board, &ui, BLACKS);
-	AlfaBetaAI_sssiie abAIssiw(&board, &ui, WHITES);
-	AlfaBetaAI_sssiie abAIssib(&board, &ui, BLACKS);
-	AlfaBetaAI_fs abAIfw(&board, &ui, WHITES);
-	AlfaBetaAI_fs abAIfb(&board, &ui, BLACKS);
+
 	//Ai ai2(&board, &ui, WHITES);
 
-	ui.loadBoard(board.getAmazons(), "images/Board10x10.png", "images/queens2.png", "images/arrow.png", "images/winMsg.png");
+	
 	//board.findAllMoves(BLACKS);
 
 	//auto moves = board.findAllMoves(WHITES);
 	//ai.moveAmazon();
 
-	auto pW = abAIssiw; // player 1 (Whites)
-	auto pB = personb; 	  // player 2 (Blacks)
-
-	//auto pW = abAIssiw; // player 1 (Whites)
-	//auto pB = abAIssb;	  // player 2 (Blacks)
-
-	std::cout << board.allPossibleDirections(WHITES) << '\n';
-
-	auto start = std::chrono::high_resolution_clock::now();
-
-	while (ui.window.isOpen())
-	{
-		if (pW.hasPossibleMove())
-		{
-			pW.makeMove();
-		}
-		else
-		{
-			ui.displayWinner(pB.getTeamColor()); // p1 ran out of moves, p2 wins
-			std::cout << "pB wins" << std::endl;
-			break;
-		}
-
-	//	std::chrono::milliseconds timespan(2000); // or whatever
-	//	std::this_thread::sleep_for(timespan);
-
-		if (pB.hasPossibleMove())
-		{
-			pB.makeMove();
-		}
-		else
-		{
-			ui.displayWinner(pW.getTeamColor()); // p2 ran out of moves, p1 wins
-			std::cout << "pW wins" << std::endl;
-			break;
-		}
-	//	std::this_thread::sleep_for(timespan);
-	}
-
-	auto finish = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> elapsed = finish - start;
-	std::cout << "Elapsed time: " << elapsed.count() << " s\n";
-
-	ui.waitClose();
-
-
+	
 /*
 	int randomCount = 0;
 	int AlfaBetaCount = 0;

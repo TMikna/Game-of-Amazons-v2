@@ -51,6 +51,9 @@
     <ClCompile Include="Game\AI\src\AlfaBetaAI_sssiie.cpp">
       <Filter>Source Files\AIs</Filter>
     </ClCompile>
+    <ClCompile Include="Game\AI\src\Evaluations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\include\Board.h">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="Game\AI\include\AlfaBetaAI_sssiie.h">
       <Filter>Header Files\AIs</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\AI\include\Evaluations.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

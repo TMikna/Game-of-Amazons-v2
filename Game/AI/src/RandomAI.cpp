@@ -29,7 +29,7 @@ void RandomAI::shootArrow()
 	ui->placeArrow(arrowPos);
 }
 
-inline int RandomAI::chooseMove(int max)
+inline short RandomAI::chooseMove(short max)
 {
 	/* initialize random seed: */
 	srand(time(NULL));

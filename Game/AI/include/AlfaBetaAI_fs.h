@@ -1,6 +1,7 @@
 #pragma once
 #include "../../include/UI.h"
 #include "../../include/Player.h"
+#include "Evaluations.h"
 
 
 /// <summary>
@@ -10,10 +11,11 @@ class AlfaBetaAI_fs :
     public Player
 {
 	public:
-		AlfaBetaAI_fs(Board* board, UI* ui, int teamColor) :Player(teamColor)
+		AlfaBetaAI_fs(Board* board, Evaluation* evaluation, UI* ui, short teamColor) :Player(teamColor)
 		{
 			this->board = board;
 			this->ui = ui;
+			this->evaluation = evaluation;
 		}
 		//Virtual function
 		virtual void moveAmazon();
@@ -26,10 +28,9 @@ class AlfaBetaAI_fs :
 		Board* board;
 		Position oldPos, newPos, arrowPos;
 		AmazonMove move; //holds oldPos and newPos
-		// int** amazons; //amazons, controlled by AI;
+		Evaluation* evaluation;
+		// short** amazons; //amazons, controlled by AI;
 
-		inline float AlfaBeta(Board* searchBoard, int depth, float alpha, float beta, bool maximizingPlayer);
-		inline float Evaluate(Board* board, int nextMovingTeamColor);
-
+		inline float AlfaBeta(Board* searchBoard, short depth, float alpha, float beta, bool maximizingPlayer);
 };
 
