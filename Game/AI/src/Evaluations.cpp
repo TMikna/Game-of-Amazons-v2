@@ -18,7 +18,7 @@ float PossibleMovesEvaluation::Evaluate(Board* board, short nextMovingTeamColor,
 }
 
 // Editing Evaluation formula no possible move case in AlfaBetaAI_ss should be reviewed
-inline float DirectionsMovesEvaluation::Evaluate(Board* board, short nextMovingTeamColor, short teamColor, short oppositeTeamColor)
+float DirectionsMovesEvaluation::Evaluate(Board* board, short nextMovingTeamColor, short teamColor, short oppositeTeamColor)
 {
 
 	float cof1 = 0.3f;

@@ -5,7 +5,7 @@
 void Amazons::play(int gamesAmount)
 {
 	PossibleMovesEvaluation pme;
-	//DirectionsMovesEvaluation dme;
+	DirectionsMovesEvaluation dme;
 
 	Person personw(&board, &ui, WHITES);
 	Person personb(&board, &ui, BLACKS);
@@ -15,8 +15,8 @@ void Amazons::play(int gamesAmount)
 	AlfaBetaAI_ss abAIsb(&board, &pme, &ui, BLACKS);
 	AlfaBetaAI_sssi abAIssw(&board, &pme, &ui, WHITES);
 	AlfaBetaAI_sssi abAIssb(&board, &pme, &ui, BLACKS);
-	//AlfaBetaAI_sssi abAIssiw(&board, &dme, &ui, WHITES);
-	//AlfaBetaAI_sssi abAIssib(&board, &dme, &ui, BLACKS);
+	AlfaBetaAI_sssi abAIssiw(&board, &dme, &ui, WHITES);
+	AlfaBetaAI_sssi abAIssib(&board, &dme, &ui, BLACKS);
 	//AlfaBetaAI_sssiie abAIssiw(&board, &ui, WHITES);
 	//AlfaBetaAI_sssiie abAIssib(&board, &ui, BLACKS);
 	AlfaBetaAI_fs abAIfw(&board, &pme, &ui, WHITES);
@@ -24,8 +24,8 @@ void Amazons::play(int gamesAmount)
 
 
 
-	auto pW = abAIfw; // player 1 (Whites)
-	auto pB = rAIb;	  // player 2 (Blacks)
+	auto pW = personw; // player 1 (Whites)
+	auto pB = abAIfb;	  // player 2 (Blacks)
 
 	//auto pW = abAIssiw; // player 1 (Whites)
 	//auto pB = abAIssb;	  // player 2 (Blacks)

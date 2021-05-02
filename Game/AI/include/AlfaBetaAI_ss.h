@@ -13,6 +13,7 @@ public:
 	{
 		this->board = board;
 		this->ui = ui;
+		this->evaluation = evaluation;
 	}
 	//Virtual function
 	virtual void moveAmazon();
