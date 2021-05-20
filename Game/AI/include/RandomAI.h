@@ -6,10 +6,10 @@ class RandomAI :
 	public Player
 {
 public:
-	RandomAI(Board* board, UI* ui, short teamColor):Player(teamColor)
+	RandomAI(Board* board, UI* ui, short teamColor):Player(board, ui, teamColor)
 	{
-		this->board = board;
-		this->ui = ui;
+		//this->board = board;
+		//this->ui = ui;
 	}
 	//Virtual function
 	virtual void moveAmazon();
@@ -18,8 +18,8 @@ public:
 
 
 private:
-	UI* ui;
-	Board* board;
+	//UI* ui;
+	//Board* board;
 	Position oldPos, newPos, arrowPos;
 	AmazonMove move; //holds oldPos and newPos
 	// short** amazons; //amazons, controlled by AI;

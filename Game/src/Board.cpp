@@ -1,6 +1,9 @@
 #include "..\include\Board.h"
 #include <iostream>
 #include <deque>
+#include <string>
+#include <fstream>
+
 
 void Board::printBoard()
 {
@@ -434,19 +437,116 @@ void Board::moveAmazon(Position oldPos, Position newPos)
 		if (wAmazonsPositions[i] == oldPos)
 		{
 			wAmazonsPositions[i] = newPos;
+			//update boolBoard - mark new position of the amazon
+			boolBoard[newPos.x][newPos.y][0] = true;
+			boolBoard[oldPos.x][oldPos.y][0] = false;
 			return;
 		}
 	for (short i = 0; i < bAmazonsPositions.size(); i++)
 		if (bAmazonsPositions[i] == oldPos)
 		{
 			bAmazonsPositions[i] = newPos;
+			//update boolBoard - mark new position of the amazon
+			boolBoard[newPos.x][newPos.y][1] = true;
+			boolBoard[oldPos.x][oldPos.y][1] = false;
 			return;
 		}
 	throw "Wrong amazon position!";
 }
 
 
+int Board::loadBoardFromFile(std::string gameAsStr, UI *ui)
+{
+	
+	unsigned long index = 0;
+	int team = -1;
+
+	// used only in here, so we can allocate space just here
+	boardStates.reserve(92); //can't be more moves than that 
+
+	while (index < gameAsStr.length() && gameAsStr[index] != '\n')
+	{
+		if (gameAsStr[index] == 'W')
+			team = WHITES;
+		else if (gameAsStr[index] == 'B')
+			team = BLACKS;
+		else
+			throw "Unexpected symbor parsing game at index" + std::to_string(index) + 
+			" Got " + gameAsStr[index] + " expected 'W' or 'B' (team color)";
+		index++;
+		index++; // a bracket here
+
+		Position from = parsePosition(gameAsStr, index);
+		index += 2;
+		//position takes 2 or 3 symbols
+		if (gameAsStr[index] != '-')
+			index++;
+		index++; // skip '-'
+		// already pretty much checked in parsing function
+		//if (gameAsStr[index] != '-')
+		//	throw "unexpected symbol. Expected: '-'";
+
+		Position to = parsePosition(gameAsStr, index);
+		index += 2;
+		if (gameAsStr[index] != '/')
+			index++;
+		index++; // skip '/'
+
+		Position arrowPos = parsePosition(gameAsStr, index);
+		index += 2;
+		if (gameAsStr[index] != ']')
+			index++;
+		index++; // skip ']'
 
 
+		
+		moveAmazon(from, to);
+		placeArrow(arrowPos);
+		boardStates.push_back(boolBoard);
 
+		if (ui)
+		{
+			ui->changeAmazonPosition(from, to);
+			ui->placeArrow(arrowPos);
+		}
+		index++;
 
+	}
+	return team;
+}
+
+BoolBoardArray Board::setInitialBoolBoard()
+{		
+	BoolBoardArray boolBoard = {0};
+
+	// with other size boards, amazons would be in different positions
+	if (c::BOARD_SIZE == 10) {
+		boolBoard[0][3][1] = true;
+		boolBoard[0][6][1] = true;
+		boolBoard[3][0][1] = true;
+		boolBoard[3][c::BOARD_SIZE-1][1] = true;
+		boolBoard[6][0][0] = true;
+		boolBoard[6][c::BOARD_SIZE-1][0] = true;
+		boolBoard[c::BOARD_SIZE-1][3][0] = true;
+		boolBoard[c::BOARD_SIZE-1][6][0] = true;
+	}
+	return boolBoard;
+}  
+
+void Board::writeBoolBoard(std::ofstream* file, char winnerNotation)
+{
+	for (BoolBoardArray boardState : boardStates)
+	{
+		*file << winnerNotation << ',';
+		for (int i = 0; i < c::BOARD_SIZE; i++)
+		{
+			for (int j = 0; j < c::BOARD_SIZE; j++)
+			{
+				*file << boardState[i][j][0] << ',';
+				*file << boardState[i][j][1] << ',';
+				*file << boardState[i][j][2] << ',';
+			}
+		}
+		*file << std::endl;
+	}
+}

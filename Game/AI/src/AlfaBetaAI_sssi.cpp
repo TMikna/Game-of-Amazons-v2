@@ -2,7 +2,7 @@
 
 void AlfaBetaAI_sssi::moveAmazon()
 {
-	short maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = maximumSearchDepth;
 	// use copy so searching process do not disturb the original game state
 	Board boardCopy(board->getBoardState());
 	AmazonMove nextMove;
@@ -43,7 +43,7 @@ void AlfaBetaAI_sssi::moveAmazon()
 
 void AlfaBetaAI_sssi::shootArrow()
 {
-	short maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = maximumSearchDepth;
 	// use copy so searching process do not disturb the original game state
 	Board boardCopy(board->getBoardState());
 	AmazonMove arrowShoot;

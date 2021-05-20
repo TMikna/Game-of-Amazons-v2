@@ -2,9 +2,10 @@
 
 void AlfaBetaAI_ss::moveAmazon()
 {
-	short maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = maximumSearchDepth;
 	// use copy so searching process do not disturb the original game state
-	Board boardCopy(board->getBoardState());
+	Board boardCopy(
+		 board->getBoardState());
 	AmazonMove nextMove;
 
 #pragma region Modilied 1st half of 1st layer of alfa-beta search
@@ -45,7 +46,7 @@ void AlfaBetaAI_ss::moveAmazon()
 
 void AlfaBetaAI_ss::shootArrow()
 {
-	short maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = maximumSearchDepth;
 	// use copy so searching process do not disturb the original game state
 	Board boardCopy(board->getBoardState());
 	AmazonMove arrowShoot;

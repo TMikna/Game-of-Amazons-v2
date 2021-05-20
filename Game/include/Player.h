@@ -2,11 +2,15 @@
 
 #include <iostream>
 #include "Board.h"
+#include "UI.h"
+#include "IPlayer.h"
 
-class Player
+class Player : public IPlayer 
 {
 
 public:
+
+
 
 	void makeMove() {
 		moveAmazon();
@@ -18,8 +22,12 @@ public:
 		return teamColor;
 	}
 
-	Player(short teamColor)
+	~Player() {}
+
+	Player(Board* board, UI* ui, short teamColor)
 	{
+ 		this->board = board;
+ 		this->ui = ui;
 		this->teamColor = teamColor;
 		this->oppositeTeamColor = (teamColor * 2) % 3;
 	}
@@ -36,5 +44,7 @@ protected:
 	short teamColor = -1; // whites or blacks, -1 = neither
 	short oppositeTeamColor = -1; // whites or blacks, -1 = neither
 
+	UI* ui;
+	Board* board;
 private:
 };

@@ -5,11 +5,10 @@ class Person :
     public Player
 {
 public:
-	Person(Board *board, UI *ui, int teamColor):Player(teamColor)
+	Person(Board *board, UI *ui, int teamColor):Player(board, ui, teamColor)
 	{
-		this->board = board;
-		this->ui = ui;
-
+		//this->board = board;
+		//this->ui = ui;
 	}
 	//Virtual function
 	virtual void moveAmazon();
@@ -17,8 +16,6 @@ public:
 	virtual bool hasPossibleMove();
 
 private:
-	UI *ui;
-	Board *board;
 	Position oldPos, newPos, arrowPos;
 };
 

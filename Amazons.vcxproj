@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\AI\src\AI.cpp" />
+    <ClCompile Include="Game\AI\src\AIPlayer.cpp" />
     <ClCompile Include="Game\src\Amazons.cpp" />
     <ClCompile Include="Game\AI\src\AlfaBetaAI_ss.cpp" />
     <ClCompile Include="Game\AI\src\AlfaBetaAI_fs.cpp" />
@@ -158,6 +160,7 @@
     <ClCompile Include="Game\AI\src\AlfaBetaAI_sssiie.cpp" />
     <ClCompile Include="Game\AI\src\RandomAI.cpp" />
     <ClCompile Include="Game\src\Board.cpp" />
+    <ClCompile Include="Game\src\BoardHelpers.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Game\src\Person.cpp" />
     <ClCompile Include="Game\src\Player.cpp" />
@@ -165,6 +168,8 @@
     <ClCompile Include="Game\AI\src\Evaluations.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\AI\include\AI.h" />
+    <ClInclude Include="Game\AI\include\AIPlayer.h" />
     <ClInclude Include="Game\include\Amazons.h" />
     <ClInclude Include="Game\AI\include\Evaluations.h" />
     <ClInclude Include="Game\AI\include\AlfaBetaAI_ss.h" />
@@ -175,6 +180,7 @@
     <ClInclude Include="Game\AI\include\RandomAI.h" />
     <ClInclude Include="Game\include\Board.h" />
     <ClInclude Include="Game\include\Constants.h" />
+    <ClInclude Include="Game\include\IPlayer.h" />
     <ClInclude Include="Game\include\Person.h" />
     <ClInclude Include="Game\include\Player.h" />
     <ClInclude Include="Game\include\UI.h" />

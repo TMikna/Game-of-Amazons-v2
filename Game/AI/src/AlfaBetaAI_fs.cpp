@@ -3,7 +3,7 @@
 
 void AlfaBetaAI_fs::moveAmazon()
 {
-	short maxDepth = c::MAX_SEARCH_DEPTH;
+	short maxDepth = maximumSearchDepth;
 	// use copy so searching process do not disturb the original game state
 	Board boardCopy(board->getBoardState());
 

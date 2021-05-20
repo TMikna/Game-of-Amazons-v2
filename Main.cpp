@@ -1,15 +1,51 @@
 //UI based on chess tutorial: https://www.youtube.com/watch?v=_4EuZI8Q8cs
 
 #include "Game//include/Amazons.h"
-
+#include <chrono>  // for high_resolution_clock
+#include <iostream>
 
 
 int main()
 {
 	Amazons amazons;
 
-	amazons.loadBoard("images/Board10x10.png", "images/queens2.png", "images/arrow.png", "images/winMsg.png");
-	amazons.play(1);
+	//////////////
+	//Evaluations: 
+	//	0 - no evaluation (payler is person)
+	//  1 -
+	//  2 - 
+	//Players:
+	//	0 - person
+	//	1 - Full search Alpha Beta (AlfavetaAI_fs)
+	//	2 - 
+	// 	3 -
+	///////////////
+
+    amazons.loadImages("images/Board10x10.png", "images/queens2.png", "images/arrow.png", "images/winMsg.png");
+
+	// setPW and PD done inside the function, depending on situation afrer loading game in file
+	amazons.play_BeginFromFile("../Notebooks/Data/p10_clean.txt", "p10_boards.txt", "p10_Out.txt");
+
+	
+	//short evaluationW = 2;
+	//short PlayerW = 3;
+
+	//short evaluationB = 2;
+	//short PlayerB = 3; 
+
+	//amazons.setPW(evaluationW, PlayerW, 2);    
+	//amazons.setPB(evaluationB, PlayerB, 4);
+	//
+	//amazons.play(true);
+
+
+
+
+
+
+
+
+
 
 
 	//Board boardX;

@@ -4,6 +4,10 @@
 #include <array>
 #include <deque>
 #include <vector>
+#include <string>
+// for loanding the board from file - board makes moves itself so need to update ui too.
+#include "../include/UI.h"
+
 
 class Board
 {
@@ -13,7 +17,7 @@ public:
     Board(BoardArray boardState) { this->board = boardState; setAmazonsArrays(); };
     void moveAmazon(Position oldPos, Position newPos);
     bool isMoveAllowed(Position oldPos, Position newPos);
-    void placeArrow(Position pos) { board[pos.x][pos.y] = -1; };
+    void placeArrow(Position pos) { board[pos.x][pos.y] = -1; boolBoard[pos.x][pos.y][2] = true; };
     void undoArrow(Position pos) { board[pos.x][pos.y] = 0; };
     short getPlayer(Position pos) { return board[pos.x][pos.y]; };
     short** getAmazons();
@@ -35,6 +39,9 @@ public:
     bool hasMove(short teamColor);
     bool hasMove(Position amazon);
 
+    int loadBoardFromFile(std::string gameAsStr, UI* ui = nullptr);
+
+
     void printBoard();
 
     BoardArray getBoardState() { return board; };
@@ -42,8 +49,17 @@ public:
     void setBoardState(BoardArray board) { this->board = board; setAmazonsArrays();
     };
 
+    Position parsePosition(std::string gameStr, unsigned long index);
+    void writeBoolBoard(std::ofstream *file, char winnerNotation);
+
+
+    bool isGameFinished = false;
 private:
     BoardArray board = init::INITIAL_BOARD;
+    // third dimention: [0] - for Whites amazons, [1] - black amazons, [2] - for arrows, do we need one more for empty spaces? 
+    BoolBoardArray boolBoard = setInitialBoolBoard();
+    // used while loading board from file, since those arev the only states we need for training
+    std::vector<BoolBoardArray> boardStates; // saves board state after every move
 
     std::vector<Position> wAmazonsPositions;
     std::vector<Position> bAmazonsPositions;
@@ -52,7 +68,10 @@ private:
     bool isQueenTrajectory(Position oldPos, Position newPos);
     inline bool isOnBoard(Position pos);
     inline void findAllMovesFrom(Position pos, std::vector<AmazonMove>* moves); //for findAllMoves method
-     
-};
+    BoolBoardArray setInitialBoolBoard();
 
+    ///////////
+    // Helpers
+
+};
 

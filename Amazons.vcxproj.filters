@@ -54,6 +54,18 @@
     <ClCompile Include="Game\AI\src\Evaluations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\src\Amazons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\AI\src\AIPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\AI\src\AI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\src\BoardHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\include\Board.h">
@@ -90,6 +102,18 @@
       <Filter>Header Files\AIs</Filter>
     </ClInclude>
     <ClInclude Include="Game\AI\include\Evaluations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\include\Amazons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\AI\include\AIPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\AI\include\AI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\include\IPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

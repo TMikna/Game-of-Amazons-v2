@@ -38,6 +38,9 @@ namespace cUI
 } 
 
 typedef std::array<std::array<short, c::BOARD_SIZE>, c::BOARD_SIZE> BoardArray;
+// third dimention: [0] - for Whites amazons, [1] - black amazons, [2] - for arrows, do we need one more for empty spaces? 
+typedef std::array<std::array<bool[3], c::BOARD_SIZE>, c::BOARD_SIZE> BoolBoardArray;
+
 
 //TODO is it possible to place initial board into namespace without placing BoardArray in it
 namespace init
@@ -53,6 +56,7 @@ namespace init
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 1, 0, 0, 1, 0, 0, 0 };
+
 
     //const BoardArray INITIAL_BOARD =
     //{ 0, 2, 0, 0, 2, 0,
