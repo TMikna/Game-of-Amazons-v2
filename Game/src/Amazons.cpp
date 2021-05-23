@@ -189,7 +189,7 @@ int Amazons::play(bool waitClose, int teamToStart, bool verbose)
 	}
 	else
 	{
-		playerWhite = new AIPlayer(&board, playerW, evaluationW, ui, WHITES, maxDepthW);
+		playerWhite = new AIPlayer(&board, playerW, evaluationW, ui, WHITES, maxDepthW, filenameW);
 	}
 
 	if (playerW == 0)
@@ -198,7 +198,7 @@ int Amazons::play(bool waitClose, int teamToStart, bool verbose)
 	}
 	else
 	{
-		playerBlack = new AIPlayer(&board, playerB, evaluationB, ui, BLACKS, maxDepthB);
+		playerBlack = new AIPlayer(&board, playerB, evaluationB, ui, BLACKS, maxDepthB, filenameB);
 	}
 
 	//Person personw(&board, &ui, WHITES);

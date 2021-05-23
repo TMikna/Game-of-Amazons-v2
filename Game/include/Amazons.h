@@ -12,15 +12,18 @@ class Amazons
 {
 public:
 
-	void setPW(short eval, short player, short maxDepth = c::MAX_SEARCH_DEPTH) {
+	void setPW(short eval, short player, short maxDepth = c::MAX_SEARCH_DEPTH, std::string filename = "") {
 		evaluationW = eval;
 		playerW = player;
 		maxDepthW = maxDepth;
+		filenameW = filename;
 	}
-	void setPB(short eval, short player, short maxDepth = c::MAX_SEARCH_DEPTH) {
+	void setPB(short eval, short player, short maxDepth = c::MAX_SEARCH_DEPTH, std::string filename = "") {
 		evaluationB = eval;
 		playerB = player;
 		maxDepthB = maxDepth;
+		filenameB = filename;
+
 	}
 
 	void loadImages(std::string boardPath, std::string queensPath, std::string arrowPath, std::string winMsgPath)
@@ -53,10 +56,12 @@ private:
 	short evaluationW = -1;
 	short playerW = -1;
 	short maxDepthW = c::MAX_SEARCH_DEPTH;
+	std::string filenameW = "";
 
 	short evaluationB = -1;
 	short playerB = -1;
 	short maxDepthB = c::MAX_SEARCH_DEPTH;
+	std::string filenameB = "";
 
 
 	std::string boardPath; 

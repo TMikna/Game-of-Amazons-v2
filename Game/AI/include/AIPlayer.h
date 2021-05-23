@@ -15,9 +15,9 @@ public:
 		this->ai = ai; 
 	} 
 
-	AIPlayer(Board* board, int ai, int eval, UI* ui, short teamColor, short maxDepth)
+	AIPlayer(Board* board, int ai, int eval, UI* ui, short teamColor, short maxDepth, std::string filename = "")
 	{
-		initiateEvaluation(eval);   // evaluation should be initiated first  
+		initiateEvaluation(eval, filename);   // evaluation should be initiated first  
 		initiateAI(ai, board, evaluation, ui, teamColor, maxDepth);
 	}
 	 
@@ -38,7 +38,7 @@ private:
 	//inline float AlfaBeta(Board * searchBoard, short depth, float alpha, float beta, bool maximizingPlayer);
 
 	void initiateAI(int ai, Board* board, Evaluation* evaluation, UI* ui, short teamColor, short maxDepth);
-	void initiateEvaluation(int evaluation);
+	void initiateEvaluation(int evaluation, std::string filename = "");
 
 };
 

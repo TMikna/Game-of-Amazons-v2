@@ -3,7 +3,7 @@
 #include "../include/AlfaBetaAI_ss.h"
 #include "../include/AlfaBetaAI_sssi.h"
 
-void AIPlayer::initiateEvaluation(int evaluation)
+void AIPlayer::initiateEvaluation(int evaluation, std::string filename)
 {
 	switch (evaluation) {
 		case 1:
@@ -16,6 +16,12 @@ void AIPlayer::initiateEvaluation(int evaluation)
 		{
 			DirectionsMovesEvaluation* evalDME = new DirectionsMovesEvaluation();
 			this->evaluation = evalDME;
+			break;
+		}
+		case 3:
+		{
+			CnnEvaluation* evalCnn = new CnnEvaluation(filename);
+			this->evaluation = evalCnn;
 			break;
 		}
 		 default:

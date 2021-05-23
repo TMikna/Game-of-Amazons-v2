@@ -25,7 +25,6 @@ private:
 	Position oldPos, newPos, arrowPos;
 	AmazonMove move; //holds oldPos and newPos
 	Evaluation* evaluation;
-	short MAX_SEARCH_DEPTH;
 	short maximumSearchDepth;
 
 	// short** amazons; //amazons, controlled by AI;

@@ -27,7 +27,7 @@ int main()
 	// setPW and PD done inside the function, depending on situation afrer loading game in file
 	//amazons.play_BeginFromFile("../Notebooks/Data/p10_clean.txt", "p10_boards.txt", "p10_Out.txt");
 
-	//fw - first working
+	
 	short evaluationW = 1;
 	short PlayerW = 3;
 	// used only with CNN evaluation (evaluation = 3)

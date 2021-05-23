@@ -88,7 +88,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\tomas\MyPersonalBytes\VU\VII\Projektinis\Game of the amazons\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/Users/tomas/.conan/data/frugally-deep/v0.15.1-p0/dobiasd/stable/package/d708490469ba0aa4991e184d08b4dc82564416ea/include;C:/Users/tomas/.conan/data/eigen/3.3.7/conan/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/eigen3;C:/Users/tomas/.conan/data/functionalplus/v0.2.9-p0/dobiasd/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include;C:/Users/tomas/.conan/data/jsonformoderncpp/3.1.0/vthiery/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include;C:\Users\tomas\MyPersonalBytes\VU\VII\Projektinis\Game of the amazons\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -105,7 +106,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\tomas\MyPersonalBytes\VU\VII\Projektinis\Game of the amazons\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/Users/tomas/.conan/data/frugally-deep/v0.15.1-p0/dobiasd/stable/package/d708490469ba0aa4991e184d08b4dc82564416ea/include;C:/Users/tomas/.conan/data/eigen/3.3.7/conan/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/eigen3;C:/Users/tomas/.conan/data/functionalplus/v0.2.9-p0/dobiasd/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include;C:/Users/tomas/.conan/data/jsonformoderncpp/3.1.0/vthiery/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include;C:\Users\tomas\MyPersonalBytes\VU\VII\Projektinis\Game of the amazons\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -122,7 +124,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\tomas\MyPersonalBytes\VU\VII\Projektinis\Game of the amazons\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/Users/tomas/.conan/data/frugally-deep/v0.15.1-p0/dobiasd/stable/package/d708490469ba0aa4991e184d08b4dc82564416ea/include;C:/Users/tomas/.conan/data/eigen/3.3.7/conan/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/eigen3;C:/Users/tomas/.conan/data/functionalplus/v0.2.9-p0/dobiasd/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include;C:/Users/tomas/.conan/data/jsonformoderncpp/3.1.0/vthiery/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include;C:\Users\tomas\MyPersonalBytes\VU\VII\Projektinis\Game of the amazons\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,7 +142,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;SFML_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\tomas\MyPersonalBytes\VU\VII\Projektinis\Game of the amazons\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/Users/tomas/.conan/data/frugally-deep/v0.15.1-p0/dobiasd/stable/package/d708490469ba0aa4991e184d08b4dc82564416ea/include;C:/Users/tomas/.conan/data/eigen/3.3.7/conan/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/eigen3;C:/Users/tomas/.conan/data/functionalplus/v0.2.9-p0/dobiasd/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include;C:/Users/tomas/.conan/data/jsonformoderncpp/3.1.0/vthiery/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include;C:\Users\tomas\MyPersonalBytes\VU\VII\Projektinis\Game of the amazons\SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

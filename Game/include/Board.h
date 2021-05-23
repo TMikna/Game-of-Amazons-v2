@@ -52,12 +52,12 @@ public:
     Position parsePosition(std::string gameStr, unsigned long index);
     void writeBoolBoard(std::ofstream *file, char winnerNotation);
 
-
+    BoolBoardArray boolBoard = setInitialBoolBoard();
     bool isGameFinished = false;
 private:
     BoardArray board = init::INITIAL_BOARD;
     // third dimention: [0] - for Whites amazons, [1] - black amazons, [2] - for arrows, do we need one more for empty spaces? 
-    BoolBoardArray boolBoard = setInitialBoolBoard();
+    
     // used while loading board from file, since those arev the only states we need for training
     std::vector<BoolBoardArray> boardStates; // saves board state after every move
 

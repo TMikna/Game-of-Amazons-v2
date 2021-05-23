@@ -1,5 +1,6 @@
 #pragma once
 #include "../../include/Board.h"
+#include <fdeep/fdeep.hpp>
 
 // template/base class for all evaluations
 class Evaluation
@@ -25,7 +26,6 @@ class PossibleMovesEvaluation :
 {
 public:
 	float Evaluate(Board* board, short nextMovingTeamColor, short teamColor, short oppositeTeamColor);
-
 }; 
 
 class DirectionsMovesEvaluation :
@@ -36,3 +36,25 @@ public:
 
 };
 
+class CnnEvaluation :
+	public Evaluation
+{
+public:
+	float Evaluate(Board* board, short nextMovingTeamColor, short teamColor, short oppositeTeamColor);
+
+	CnnEvaluation(std::string filepath)
+	{
+		if (filepath.length() <= 0)
+			throw "invalid Cnn model path";
+
+		const fdeep::model model = fdeep::load_model(filepath);
+		cnnModel = model;
+
+
+
+		//fdeep::tensor t(fdeep::tensor_shape(10, 10, 3), 0.0f);
+		//const auto result = cnnModel.unsafe_get_just().predict_single_output({ t });
+	}
+private:
+	fplus::maybe<fdeep::model> cnnModel;
+};
