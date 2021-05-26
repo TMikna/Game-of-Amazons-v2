@@ -13,8 +13,8 @@ int main()
 	//////////////
 	//Evaluations: 
 	//	0 - no evaluation (payler is person)
-	//  1 -
-	//  2 - 
+	//  1 - PossibleMovesEvaluation
+	//  2 - DirectionsMovesEvaluation
 	//Players:
 	//	0 - person
 	//	1 - Full search Alpha Beta (AlfavetaAI_fs)
@@ -25,29 +25,52 @@ int main()
     amazons.loadImages("images/Board10x10.png", "images/queens2.png", "images/arrow.png", "images/winMsg.png");
 
 	// setPW and PD done inside the function, depending on situation afrer loading game in file
-	//amazons.play_BeginFromFile("../Notebooks/Data/p10_clean.txt", "p10_boards.txt", "p10_Out.txt");
+	//amazons.play_BeginFromFile("../Notebooks/Data/p10_clean.txt", "p10_boards_4d_eval.txt", "p10_Out_4d_eval.txt");
 
 	//fw - first working
-	short evaluationW = 1;
+	short evaluationW = 3;
 	short PlayerW = 3;
-	// used only with CNN evaluation (evaluation = 3)
-	std::string modelW = "fdeep_model_first.json";
+	// used only with CNN evaluation (evaluation = 3, 4)
 	//std::string modelW = "fdeep_model.json";
 
 	short evaluationB = 3;
-	short PlayerB = 3; 
-	// used only with CNN evaluation (evaluation = 3)
-	std::string modelB = "fdeep_model.json";
+	short PlayerB = 3;
+	// used only with CNN evaluation (evaluation = 3, 4)
 
 
-	amazons.setPW(evaluationW, PlayerW, 3, modelW);
-	amazons.setPB(evaluationB, PlayerB, 2, modelB);
+	//std::string modelW = "NaN";
+	//std::string modelB = "NaN";
+	std::string modelW = "fdeep_model_first.json";
+	std::string modelB = "fdeep_model_first.json";
 	
-	amazons.play(true);
+	//std::string modelB = "fdeep_model_EP_30_BS_64_LR_0.02_DU_128_DU2_128_DU3_128_SGD_ca_relu_da_relu_oa_sigmoid_loss_mse_KR_none_DR1_0.2_DR2_0.2_f1_32_f2_32_f3_32_mixedData.json";
 
+	//amazons.setPW(evaluationW, PlayerW, 3, modelW);
+	//amazons.setPB(evaluationB, PlayerB, 3, modelB);
+	//
+	//amazons.playSeveral(100);
 
+	//amazons.play(true);
 
+	short wEvals[3] = { 1,2,3 };
+	short bEvals[3] = { 1,2,3 };
 
+	for (auto wp : wEvals)
+	{
+		for (auto bp : bEvals)
+		{
+			short evaluationW = wp;
+			short PlayerW = 3;
+
+			short evaluationB = bp;
+			short PlayerB = 3;
+
+			amazons.setPW(evaluationW, PlayerW, 3, modelW);
+			amazons.setPB(evaluationB, PlayerB, 3, modelB);
+
+			amazons.playSeveral(20);
+		}
+	}
 
 
 

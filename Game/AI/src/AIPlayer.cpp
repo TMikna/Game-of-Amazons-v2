@@ -24,6 +24,12 @@ void AIPlayer::initiateEvaluation(int evaluation, std::string filename)
 			this->evaluation = evalCnn;
 			break;
 		}
+		case 4:
+		{
+			MixedEvaluation* evalMix = new MixedEvaluation(filename);
+			this->evaluation = evalMix;
+			break;
+		}
 		 default:
 		 {
 			 this->evaluation = nullptr;

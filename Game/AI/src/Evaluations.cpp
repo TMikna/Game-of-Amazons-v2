@@ -3,9 +3,14 @@
 // Editing Evaluation formula no possible move case in AlfaBetaAI_ss should be reviewed
 float PossibleMovesEvaluation::Evaluate(Board* board, short nextMovingTeamColor, short teamColor, short oppositeTeamColor)
 {
-	float bias = 0.5;
+	float bias = 0.4;
 	if (nextMovingTeamColor == teamColor)
 		bias *= -1;
+
+	// random number between -0.2 and 0.2 to avoid playing deterministically
+	float r = (float(rand()) / float((RAND_MAX)) * 0.001) - 0.0005;
+	bias += r;
+
 	short movCount = board->countAllMoves(teamColor);
 	short enemyMovCount = board->countAllMoves(oppositeTeamColor);
 
@@ -21,12 +26,18 @@ float PossibleMovesEvaluation::Evaluate(Board* board, short nextMovingTeamColor,
 float DirectionsMovesEvaluation::Evaluate(Board* board, short nextMovingTeamColor, short teamColor, short oppositeTeamColor)
 {
 
-	float cof1 = 0.3f;
+	float cof1 = 0.45f;
 	float cof2 = 1 - cof1;
 
-	float bias = 0.5;
+	float bias = 0.4;
 	if (nextMovingTeamColor == teamColor)
-		bias *= -1;
+		bias *= -1; 
+
+	// random number between -0.05 and 0.05 to avoid playing deterministically
+	float r = (float(rand()) / float((RAND_MAX)) * 0.001) - 0.0005;
+
+	bias += r;
+
 	short movCount = board->countAllMoves(teamColor);
 	short enemyMovCount = board->countAllMoves(oppositeTeamColor);
 
@@ -55,7 +66,7 @@ float CnnEvaluation::Evaluate(Board* board, short nextMovingTeamColor, short tea
 
 	//auto start = std::chrono::high_resolution_clock::now();
 
-	fdeep::tensor t(fdeep::tensor_shape(10, 10, 3), 0.0f);
+	fdeep::tensor t(fdeep::tensor_shape(10, 10, dim), 0.0f);
 
 	//auto createTensor = std::chrono::high_resolution_clock::now();
 	//std::chrono::duration<double> createDuration = createTensor - start;
@@ -64,7 +75,7 @@ float CnnEvaluation::Evaluate(Board* board, short nextMovingTeamColor, short tea
 	{
 		for (int x = 0; x < 10; ++x)
 		{
-			for (int c = 0; c < 3; ++c)
+			for (int c = 0; c < dim; ++c)
 			{
 				t.set(fdeep::tensor_pos(y, x, c), (float)board->boolBoard[y][x][c]);
 			}
@@ -80,19 +91,36 @@ float CnnEvaluation::Evaluate(Board* board, short nextMovingTeamColor, short tea
 
 	const auto result = cnnModel.unsafe_get_just().predict_single_output({ t });
 
-	auto predict = std::chrono::high_resolution_clock::now();
+	//auto predict = std::chrono::high_resolution_clock::now();
 	//std::chrono::duration<double> predictDuration = predict - fillTensor;
 	//std::chrono::duration<double> allDuration = predict - start;
 	//std::cout << "All evaluation time: " << allDuration.count() << " s" << " Create tensor: " << createDuration.count() << " s"
 	//	<< " Fill tensor: " << fillDuration.count() << " s" << " Predict: " << predictDuration.count() << " s" << '\n';
 
 
-	std::cout << result << '\n';
+	//std::cout << result << '\n';
 	evaluation = result * 2 - 1; //convert from [0;1] to [-1;1]
+
+	//evaluation = result;
 
 	if (teamColor == BLACKS)
 		evaluation *= -1;
 	//std::cout << evaluation << '\n';
+
+	if (evaluation > 1 || evaluation < -1)
+		throw "incorrect evaluation";
+
+	return evaluation;
+}
+
+float MixedEvaluation::Evaluate(Board* board, short nextMovingTeamColor, short teamColor, short oppositeTeamColor)
+{
+	// 92 moves can be made in total (usually last earlier), so dividing by 90 we roughly get how much of the game passed
+	float coef = board->moveCount / 90;
+
+	float cnnEva = cnnEval.Evaluate(board, nextMovingTeamColor, teamColor, oppositeTeamColor);
+	float dmEva = dmEval.Evaluate(board, nextMovingTeamColor, teamColor, oppositeTeamColor);
+	float evaluation = cnnEva * (1 - coef) + dmEva * coef;
 
 	return evaluation;
 }

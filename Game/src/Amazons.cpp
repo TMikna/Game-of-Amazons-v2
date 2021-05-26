@@ -78,7 +78,7 @@ void Amazons::play_BeginFromFile(std::string fileName, std::string outGameFileNa
 						outfile << winnerMarker << ';' << gameAsStr << '\n';
 
 					if (outGameFile.is_open())
-						board.writeBoolBoard(&outGameFile, winnerMarker);
+						board.writeBoolBoard (&outGameFile, whitesEvaluation);
 
 					//update info
 					
@@ -135,8 +135,6 @@ void Amazons::play_BeginFromFile(std::string fileName, std::string outGameFileNa
 		std::chrono::duration<double> elapsed = finish - startTime;
 		std::cout << "\nFINISHED \n";
 		std::cout << "Evaluated total " << totalGames << " games. " << "Elapsed time: " << elapsed.count() << " s\n";
-
-
 	}
 	else
 		throw "Unable to open file " + fileName + " to read the game";
@@ -147,15 +145,47 @@ void Amazons::playSeveral(int gamesAmount)
 {
 	auto start = std::chrono::high_resolution_clock::now();
 
+	int wWins = 0;
+	int bWins = 0;
 
 	for (int i = 0; i < gamesAmount; i++)
 	{
-		play(false);
+		auto winner = play(false);
+		if (winner == WHITES)
+			wWins++;
+		else
+			bWins++;
+		
+		reloadBoard();
 	}
+	//auto winner = play(true);
+	//if (winner == WHITES)
+	//	wWins++;
+	//else
+	//	bWins++;
+	int totalGames = wWins + bWins;
 
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
-	std::cout << "Elapsed time: " << elapsed.count() << " s\n";
+	std::cout << "\n\n";
+	std::cout << "Elapsed time: " << elapsed.count() << "Avg. time per game: " << elapsed.count()/totalGames << " \n";
+	std::cout << "White wins: " << wWins << "   Black wins: " << bWins << " \n";
+
+	std::ofstream outfile("Results.csv", std::ios::app);
+	if (outfile.is_open())
+	{
+	/*	outfile << "Played games" << ',' << "White wins" << ',' << "Black wins" << ',' << "Duration" << ',' << "avg dur/game" << ',' <<
+			"White player" << ',' << "White eval" << ',' << "White depth" << ',' <<
+			"Black player" << ',' << "Black eval" << ',' << "Black depth" << ',' <<
+			"White model name" << ',' << "Black model name" << '\n';*/
+
+
+		outfile << totalGames << ',' << wWins << ',' << bWins << ',' << elapsed.count() << ',' << elapsed.count() / totalGames << ',' <<
+			playerW << ',' << evaluationW << ',' << maxDepthW << ',' <<
+			playerB << ',' << evaluationB << ',' << maxDepthB << ',' <<
+			filenameW << ',' << filenameB << '\n';
+	}
+	outfile.close();
 }
 
 
@@ -192,7 +222,7 @@ int Amazons::play(bool waitClose, int teamToStart, bool verbose)
 		playerWhite = new AIPlayer(&board, playerW, evaluationW, ui, WHITES, maxDepthW, filenameW);
 	}
 
-	if (playerW == 0)
+	if (playerB == 0)
 	{
 		playerBlack = new Person(&board, ui, BLACKS);
 	}
@@ -200,6 +230,8 @@ int Amazons::play(bool waitClose, int teamToStart, bool verbose)
 	{
 		playerBlack = new AIPlayer(&board, playerB, evaluationB, ui, BLACKS, maxDepthB, filenameB);
 	}
+
+	//playerWhite = new RandomAI(&board, ui, WHITES);
 
 	//Person personw(&board, &ui, WHITES);
 	//Person personb(&board, &ui, BLACKS);

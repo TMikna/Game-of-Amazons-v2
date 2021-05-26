@@ -440,6 +440,8 @@ void Board::moveAmazon(Position oldPos, Position newPos)
 			//update boolBoard - mark new position of the amazon
 			boolBoard[newPos.x][newPos.y][0] = true;
 			boolBoard[oldPos.x][oldPos.y][0] = false;
+			boolBoard[newPos.x][newPos.y][3] = true;
+			boolBoard[oldPos.x][oldPos.y][3] = false;
 			return;
 		}
 	for (short i = 0; i < bAmazonsPositions.size(); i++)
@@ -449,6 +451,8 @@ void Board::moveAmazon(Position oldPos, Position newPos)
 			//update boolBoard - mark new position of the amazon
 			boolBoard[newPos.x][newPos.y][1] = true;
 			boolBoard[oldPos.x][oldPos.y][1] = false;
+			boolBoard[newPos.x][newPos.y][3] = true;
+			boolBoard[oldPos.x][oldPos.y][3] = false;
 			return;
 		}
 	throw "Wrong amazon position!";
@@ -529,15 +533,28 @@ BoolBoardArray Board::setInitialBoolBoard()
 		boolBoard[6][c::BOARD_SIZE-1][0] = true;
 		boolBoard[c::BOARD_SIZE-1][3][0] = true;
 		boolBoard[c::BOARD_SIZE-1][6][0] = true;
+
+		boolBoard[0][3][3] = true;
+		boolBoard[0][6][3] = true;
+		boolBoard[3][0][3] = true;
+		boolBoard[3][c::BOARD_SIZE - 1][3] = true;
+		boolBoard[6][0][3] = true;
+		boolBoard[6][c::BOARD_SIZE - 1][3] = true;
+		boolBoard[c::BOARD_SIZE - 1][3][3] = true;
+		boolBoard[c::BOARD_SIZE - 1][6][3] = true;
 	}
 	return boolBoard;
 }  
 
-void Board::writeBoolBoard(std::ofstream* file, char winnerNotation)
+void Board::writeBoolBoard(std::ofstream* file, float whitesEval)
 {
 	for (BoolBoardArray boardState : boardStates)
 	{
-		*file << winnerNotation << ',';
+		*file << whitesEval << ',';
+		//*file << boardState[c::BOARD_SIZE - 1][c::BOARD_SIZE - 1][0] << ',';
+		//*file << boardState[c::BOARD_SIZE - 1][c::BOARD_SIZE - 1][1] << ',';
+		//*file << boardState[c::BOARD_SIZE - 1][c::BOARD_SIZE - 1][2] << ',';
+		//*file << boardState[c::BOARD_SIZE - 1][c::BOARD_SIZE - 1][3] << ';';
 		for (int i = 0; i < c::BOARD_SIZE; i++)
 		{
 			for (int j = 0; j < c::BOARD_SIZE; j++)
@@ -545,6 +562,7 @@ void Board::writeBoolBoard(std::ofstream* file, char winnerNotation)
 				*file << boardState[i][j][0] << ',';
 				*file << boardState[i][j][1] << ',';
 				*file << boardState[i][j][2] << ',';
+				*file << boardState[i][j][3] << ',';
 			}
 		}
 		*file << std::endl;

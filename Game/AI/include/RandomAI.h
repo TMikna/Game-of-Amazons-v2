@@ -13,6 +13,7 @@ public:
 	}
 	//Virtual function
 	virtual void moveAmazon();
+
 	virtual void shootArrow();
 	virtual bool hasPossibleMove();
 

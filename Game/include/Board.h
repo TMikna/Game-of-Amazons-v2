@@ -17,7 +17,12 @@ public:
     Board(BoardArray boardState) { this->board = boardState; setAmazonsArrays(); };
     void moveAmazon(Position oldPos, Position newPos);
     bool isMoveAllowed(Position oldPos, Position newPos);
-    void placeArrow(Position pos) { board[pos.x][pos.y] = -1; boolBoard[pos.x][pos.y][2] = true; };
+    void placeArrow(Position pos) { 
+        board[pos.x][pos.y] = -1; 
+        boolBoard[pos.x][pos.y][2] = true; 
+        boolBoard[pos.x][pos.y][3] = true;
+        moveCount++;
+    };
     void undoArrow(Position pos) { board[pos.x][pos.y] = 0; };
     short getPlayer(Position pos) { return board[pos.x][pos.y]; };
     short** getAmazons();
@@ -50,10 +55,13 @@ public:
     };
 
     Position parsePosition(std::string gameStr, unsigned long index);
-    void writeBoolBoard(std::ofstream *file, char winnerNotation);
+    void writeBoolBoard(std::ofstream *file, float winnerNotation);
 
     BoolBoardArray boolBoard = setInitialBoolBoard();
     bool isGameFinished = false;
+
+    //how many times amazons were moved, both players counted in, arrow shooting not counted in, updated after arrow shot
+    int moveCount = 0;
 private:
     BoardArray board = init::INITIAL_BOARD;
     // third dimention: [0] - for Whites amazons, [1] - black amazons, [2] - for arrows, do we need one more for empty spaces? 
